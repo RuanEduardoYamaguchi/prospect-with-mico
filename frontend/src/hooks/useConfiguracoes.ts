@@ -22,6 +22,7 @@ export function useSalvarConfiguracao() {
       configService.salvar(chave, valor),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["configuracoes"] })
+      queryClient.invalidateQueries({ queryKey: ["onboarding"] })
       toast.success("Chave de API salva.")
     },
   })
@@ -41,6 +42,7 @@ export function useSalvarPerfilVendedor() {
     mutationFn: (perfil: PerfilVendedor) => configService.salvarPerfilVendedor(perfil),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["perfil-vendedor"] })
+      queryClient.invalidateQueries({ queryKey: ["onboarding"] })
       toast.success("Perfil salvo - as próximas copies já saem na sua voz.")
     },
   })
@@ -101,6 +103,7 @@ export function useSalvarFonteMaps() {
       configService.salvarFonteMaps(fonte, chave),
     onSuccess: (dados) => {
       queryClient.invalidateQueries({ queryKey: ["fonte-maps"] })
+      queryClient.invalidateQueries({ queryKey: ["onboarding"] })
       toast.success(
         dados.fonte === "places"
           ? "Fonte salva: Google Places API (chave validada)."

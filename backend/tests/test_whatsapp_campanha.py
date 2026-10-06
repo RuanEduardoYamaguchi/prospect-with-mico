@@ -492,3 +492,16 @@ def test_sem_liberacao_o_oficial_continua_bloqueado(monkeypatch):
     from whatsapp import evolution
     monkeypatch.delenv("PERMITIR_CAMPANHA_NO_OFICIAL", raising=False)
     assert not evolution.campanha_no_oficial_liberada()
+
+
+def test_numero_oficial_com_sufixo_de_aparelho(monkeypatch):
+    from whatsapp import evolution
+    monkeypatch.setenv("NUMERO_OFICIAL", "41988887777")
+    assert evolution.e_numero_oficial("5541988887777:12@s.whatsapp.net")
+
+
+def test_numero_oficial_invalido_avisa_no_log(monkeypatch, caplog):
+    from whatsapp import evolution
+    monkeypatch.setenv("NUMERO_OFICIAL", "9999-0000")
+    assert not evolution.e_numero_oficial("5541988887777")
+    assert "DESLIGADA" in caplog.text

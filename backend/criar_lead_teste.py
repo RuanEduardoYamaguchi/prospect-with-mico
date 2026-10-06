@@ -74,7 +74,7 @@ def criar(telefone_bruto):
         conexao.close()
 
     print(f"Lead de teste pronto com o número {digitos}.")
-    print("Abra o ProspectOS -> Google Maps -> procure por 'TESTE - Meu próprio número'.")
+    print("Abra o PROSPECT WITH MICO -> Leads -> procure por 'TESTE - Meu próprio número'.")
 
 
 if __name__ == "__main__":

@@ -20,6 +20,7 @@ from datetime import date, datetime, timedelta
 
 import db
 from constantes import (
+    MARCADOR_PREENCHER,
     ESTAGIO_NEGOCIACAO_PADRAO,
     ESTAGIOS_NEGOCIACAO,
     MAX_CARACTERES_ITEM_EVITAR,
@@ -297,7 +298,7 @@ NOMES_DIAS_UTEIS = ["segunda", "terça", "quarta", "quinta", "sexta"]
 
 def _tarefa_primeiro_contato(canal_e_tamanho, alvo):
     """Primeira linha do prompt de primeiro contato. Com estratégia de abordagem,
-    a oferta e o tamanho saem dela; sem, vale o padrão do ProspectOS (site)."""
+    a oferta e o tamanho saem dela; sem, vale o padrão da ferramenta (site)."""
     if ler_estrategia_abordagem():
         return (f"Escreva UMA mensagem de primeiro contato via {canal_e_tamanho.split(' (')[0]} para "
                 f"{alvo}, seguindo a ESTRATÉGIA DE ABORDAGEM (oferta, tamanho, estrutura e fechamento).")
@@ -367,6 +368,11 @@ def ler_estrategia_abordagem():
     try:
         texto = CAMINHO_ESTRATEGIA.read_text(encoding="utf-8").strip()
     except OSError:
+        return ""
+    # modelo salvo sem preencher: a IA copiaria "[PREENCHER: seu nome]" pra
+    # mensagem do lead. Vale o padrão até a pessoa terminar de escrever.
+    if MARCADOR_PREENCHER in texto:
+        logger.warning("estrategia_abordagem.md ainda tem [PREENCHER: ...]; usando o padrão")
         return ""
     return texto[:MAX_CARACTERES_ESTRATEGIA]
 

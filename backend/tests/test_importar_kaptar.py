@@ -1,6 +1,5 @@
 """Testes do importador do Kaptar: parsing do CSV (os dois formatos de export
-+ o formato simples), dedupe, atualização de lead existente por telefone e o
-replay do histórico de envios do painel Node antigo (envios.jsonl).
++ o formato simples), dedupe e atualização de lead existente por telefone.
 """
 
 import sqlite3

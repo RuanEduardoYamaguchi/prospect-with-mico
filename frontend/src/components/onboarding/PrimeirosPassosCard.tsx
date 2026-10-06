@@ -158,6 +158,7 @@ export function PrimeirosPassosCard({ sempreVisivel = false }: PrimeirosPassosCa
       <div
         className="mt-4 h-1.5 overflow-hidden rounded-full bg-muted"
         role="progressbar"
+        aria-label="Progresso dos primeiros passos"
         aria-valuenow={feitos}
         aria-valuemin={0}
         aria-valuemax={passos.length}
@@ -172,14 +173,15 @@ export function PrimeirosPassosCard({ sempreVisivel = false }: PrimeirosPassosCa
         {passos.map((passo) => (
           <li key={passo.chave} className="flex items-start gap-3 py-3">
             {passo.feito ? (
-              <CircleCheck className="mt-0.5 size-5 shrink-0 text-success" />
+              <CircleCheck aria-hidden className="mt-0.5 size-5 shrink-0 text-success" />
             ) : (
-              <Circle className="mt-0.5 size-5 shrink-0 text-muted-foreground/60" />
+              <Circle aria-hidden className="mt-0.5 size-5 shrink-0 text-muted-foreground/60" />
             )}
             <div className="min-w-0 flex-1">
               <p className="flex flex-wrap items-center gap-2 text-sm font-medium">
                 <span className={cn(passo.feito && "text-muted-foreground line-through")}>
                   {passo.titulo}
+                  <span className="sr-only">{passo.feito ? " (feito)" : " (pendente)"}</span>
                 </span>
                 {!passo.feito && (
                   <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">

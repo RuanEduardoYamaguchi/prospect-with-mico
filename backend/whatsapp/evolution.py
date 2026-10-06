@@ -113,7 +113,7 @@ def _numero_conectado(cfg):
         if nome != cfg["instancia"]:
             continue
         bruto = instancia.get("owner") or instancia.get("ownerJid") or instancia.get("number") or ""
-        digitos = re.sub(r"\D", "", str(bruto).split("@")[0])
+        digitos = re.sub(r"\D", "", str(bruto).split("@")[0].split(":")[0])
         return digitos or None
     return None
 
@@ -156,14 +156,21 @@ def campanha_no_oficial_liberada():
 def _chave_numero(numero):
     """DDD + últimos 8 dígitos: ignora o 55 e o nono dígito, que o WhatsApp às
     vezes omite, pra "41 99999-0000" e "554199990000" serem o mesmo número."""
-    digitos = re.sub(r"\D", "", str(numero or ""))
+    # "5541999990000:12@s.whatsapp.net" -> só o número, sem aparelho nem domínio
+    bruto = str(numero or "").split("@")[0].split(":")[0]
+    digitos = re.sub(r"\D", "", bruto)
     if digitos.startswith("55") and len(digitos) >= 12:
         digitos = digitos[2:]
     return digitos[:2] + digitos[-8:] if len(digitos) >= 10 else ""
 
 
 def e_numero_oficial(numero):
-    oficial = _chave_numero(os.environ.get("NUMERO_OFICIAL"))
+    configurado = (os.environ.get("NUMERO_OFICIAL") or "").strip()
+    oficial = _chave_numero(configurado)
+    if configurado and not oficial:
+        logger.warning(
+            "NUMERO_OFICIAL=%r não parece um número com DDD; a trava de campanha está DESLIGADA", configurado
+        )
     conectado = _chave_numero(numero)
     return bool(oficial and conectado and oficial == conectado)
 

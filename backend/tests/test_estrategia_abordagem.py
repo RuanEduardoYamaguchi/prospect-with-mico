@@ -77,3 +77,17 @@ def test_modelo_nao_traz_telefone_email_nem_link_de_ninguem():
     assert not re.search(r"\d{8,}", modelo)
     assert "@" not in modelo
     assert "http" not in modelo.lower()
+
+
+def test_estrategia_com_marcador_vale_como_vazia():
+    ia.CAMINHO_ESTRATEGIA.write_text("Aqui é o [PREENCHER: seu nome].", encoding="utf-8")
+    assert ia.ler_estrategia_abordagem() == ""
+    assert "PREENCHER" not in ia.montar_system_copywriter("WhatsApp")
+
+
+def test_rota_recusa_salvar_estrategia_com_marcador():
+    resposta = app_module.app.test_client().post(
+        "/api/configuracoes/estrategia-abordagem", json={"texto": "Sou o [PREENCHER: seu nome]."}
+    )
+    assert resposta.status_code == 400
+    assert not ia.CAMINHO_ESTRATEGIA.exists()

@@ -37,7 +37,7 @@ CHAVES_CONFIG_VALIDAS = {
 # (Windows Credential Manager, via keyring/DPAPI), nunca em plaintext no
 # leads.db - o banco entra nos backups automáticos, o cofre não.
 CHAVES_SECRETAS = set(CHAVES_CONFIG_VALIDAS)
-_SERVICO_KEYRING = "ProspectOS"
+_SERVICO_KEYRING = "ProspectWithMico"
 
 
 def _keyring_obter(chave):

@@ -21,9 +21,15 @@ export function EstrategiaAbordagemCard({ abertoInicial = false }: { abertoInici
     queryFn: configService.obterEstrategiaAbordagem,
   })
 
+  // sincroniza com o servidor só no carregamento (e depois de salvar): um
+  // refetch em segundo plano não pode apagar o que a pessoa está digitando
+  const [sincronizado, setSincronizado] = useState(false)
   useEffect(() => {
-    if (data) setTexto(data.texto)
-  }, [data])
+    if (data && !sincronizado) {
+      setTexto(data.texto)
+      setSincronizado(true)
+    }
+  }, [data, sincronizado])
 
   const salvar = useMutation({
     mutationFn: () => configService.salvarEstrategiaAbordagem(texto),

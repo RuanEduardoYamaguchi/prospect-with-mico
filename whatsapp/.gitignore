@@ -1,5 +1,1 @@
 .env
-painel/node_modules/
-painel/dados/*.jsonl
-painel/dados/*.json
-painel/dados/contatos.json

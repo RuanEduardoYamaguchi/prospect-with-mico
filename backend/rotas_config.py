@@ -6,7 +6,7 @@ from flask import Blueprint, jsonify, request
 
 import db
 import ia
-from constantes import MAX_CARACTERES_TEXTO_TEMPLATE, MAX_CARACTERES_TITULO_TEMPLATE
+from constantes import MARCADOR_PREENCHER, MAX_CARACTERES_TEXTO_TEMPLATE, MAX_CARACTERES_TITULO_TEMPLATE
 
 bp = Blueprint("config", __name__)
 
@@ -166,6 +166,10 @@ def obter_estrategia_abordagem():
 @bp.route("/api/configuracoes/estrategia-abordagem", methods=["POST"])
 def salvar_estrategia_abordagem():
     texto = str((request.json or {}).get("texto", ""))
+    if MARCADOR_PREENCHER in texto:
+        return jsonify({
+            "erro": "a estratégia ainda tem trechos [PREENCHER: ...]. Troque ou apague cada um antes de salvar."
+        }), 400
     if len(texto) > ia.MAX_CARACTERES_ESTRATEGIA:
         return jsonify({
             "erro": f"a estratégia passou do limite ({ia.MAX_CARACTERES_ESTRATEGIA} caracteres)"
