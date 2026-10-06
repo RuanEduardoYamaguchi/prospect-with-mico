@@ -1,0 +1,52 @@
+# ---------------------------------------------------------------------------
+# Segredos e dados de quem usa: NUNCA entram no Git
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# banco de leads (contatos reais) e arquivos temporários do SQLite
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+
+# listas de contatos, exports e históricos de envio
+*.jsonl
+contatos.json
+backend/saidas/
+backend/backups/
+backend/backups_manuais/
+
+# sessão logada do Instagram e comentários raspados
+backend/instagram/sessao/
+backend/instagram/comentarios/
+
+# sua estratégia de abordagem (o modelo é estrategia_abordagem.exemplo.md)
+backend/estrategia_abordagem.md
+backend/estrategia_abordagem.anterior.md
+
+# ---------------------------------------------------------------------------
+# Gerados em runtime
+# ---------------------------------------------------------------------------
+logs/
+*.log
+backend/porta.txt
+backend/queries.txt
+backend/google-maps-scraper.exe
+
+# ---------------------------------------------------------------------------
+# Dependências e builds
+# ---------------------------------------------------------------------------
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Sistema e editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

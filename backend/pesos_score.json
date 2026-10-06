@@ -1,0 +1,11 @@
+{
+  "bonus_construtor_generico": 8,
+  "bonus_avaliacao_alta_poucas_avaliacoes": 10,
+  "nota_minima_avaliacao_alta": 4.5,
+  "max_avaliacoes_poucas": 60,
+  "bonus_sem_instagram": 0,
+  "penalidade_muitas_avaliacoes": 15,
+  "min_avaliacoes_penalidade": 1000,
+  "bonus_nicho_alvo": 0,
+  "nichos_alvo": []
+}

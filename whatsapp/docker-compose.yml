@@ -1,0 +1,57 @@
+# Evolution API: a ponte entre o PROSPECT WITH MICO e o WhatsApp.
+# Sobe junto com o iniciar.bat. Só precisa do Docker Desktop aberto.
+#
+# Segurança:
+# - Tudo escuta só em 127.0.0.1 (a sua máquina). Nada fica exposto na rede.
+# - Banco e Redis não têm porta publicada: só a Evolution fala com eles.
+# - A senha do banco e a chave da API vêm do arquivo .env, gerado pelo
+#   configurar.bat com valores aleatórios. Nunca use senha padrão.
+
+services:
+  evolution-api:
+    image: evoapicloud/evolution-api:latest
+    container_name: prospector-evolution
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    env_file:
+      - .env
+    extra_hosts:
+      # deixa a Evolution entregar as respostas dos leads no backend (porta 5000)
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - evolution_instances:/evolution/instances
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: prospector-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: evolution
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?rode o configurar.bat antes de subir o WhatsApp}
+      POSTGRES_DB: evolution
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evolution"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: prospector-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+volumes:
+  evolution_instances:
+  postgres_data:
+  redis_data:

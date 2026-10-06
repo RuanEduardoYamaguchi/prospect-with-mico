@@ -1,0 +1,32 @@
+.env
+leads.db
+# arquivos temporários do SQLite em modo WAL - também contêm dados de leads
+leads.db-*
+saidas/
+__pycache__/
+*.pyc
+logs/
+*.log
+backups/
+backups_manuais/
+.pytest_cache/
+google-maps-scraper.exe
+queries.txt
+instagram/sessao/
+instagram/comentarios/
+# porta escolhida em runtime (escrita pelo app.py a cada inicio)
+porta.txt
+# node portatil embutido no instalador (baixado no build, nao versionado)
+node/
+# artefatos de build do PyInstaller
+build/
+dist/
+
+# ambiente do Python (criado pelo iniciar.bat)
+.venv/
+
+# versao anterior da estrategia (backup local do botao Salvar)
+estrategia_abordagem.anterior.md
+# a SUA estratégia (o modelo versionado é estrategia_abordagem.exemplo.md)
+estrategia_abordagem.md
+*.md.tmp
