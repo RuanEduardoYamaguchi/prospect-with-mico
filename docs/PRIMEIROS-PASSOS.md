@@ -40,7 +40,8 @@ Na primeira vez ele:
 
 Se o Docker não estiver aberto, tudo funciona normalmente, menos o envio pelo WhatsApp.
 
-Pra fechar, é só fechar a aba. Para abrir de novo, `iniciar.bat` outra vez.
+Fechar a aba **não** desliga o sistema: ele continua rodando em segundo plano. Pra desligar tudo
+(backend, interface e WhatsApp), dê dois cliques em **`parar.bat`**. Para abrir de novo, `iniciar.bat` outra vez.
 
 ## 3. Chave do Google Places (busca de negócios)
 
@@ -113,7 +114,7 @@ Também dá pra **importar uma lista** (CSV ou "Nome, telefone" por linha) na te
 
 1. Abra a ficha de um lead (clique no cartão).
 2. Veja o **Raio-X do site** e a **estratégia sugerida** para ele.
-3. Clique em **Gerar copy de contato** (abordagem direta) ou **Gerar pedido de print** (abertura que não vende nada, só pede
+3. Clique em **Contato** (abordagem direta) ou **Pedido de print** (abertura que não vende nada, só pede
    pra falar com o responsável). Edite o texto se quiser.
 4. Copie e envie. Com o WhatsApp integrado, envie direto pelo botão da ficha.
 5. Marque o status e, se quiser, um follow-up. O sistema agenda um follow-up 3 dias depois do contato.
@@ -160,7 +161,7 @@ Espere uns 10 segundos depois do `iniciar.bat` e recarregue. Se persistir, veja 
 Instale (passo 1) e, no Python, marque *Add python.exe to PATH*. Feche e abra o `iniciar.bat` de novo.
 
 **A porta 5000 ou 5173 já está em uso.**
-Feche o que estiver usando (ou outra cópia do PROSPECT WITH MICO) e rode o `iniciar.bat` de novo.
+Rode o `parar.bat` (pode ser uma execução anterior ainda ligada) ou feche o que estiver usando (ou outra cópia do PROSPECT WITH MICO) e rode o `iniciar.bat` de novo.
 
 **A busca não acha nada ou dá erro de chave.**
 Confira a chave do Google Places (passo 3), se a **Places API (New)** está ativada e se o faturamento do projeto está ativo.
@@ -174,6 +175,10 @@ O Docker Desktop precisa estar aberto e com **Engine running**. Veja `whatsapp\R
 
 **Quero apagar tudo e recomeçar.**
 Feche o sistema, apague `backend\leads.db` e abra de novo. Há backups automáticos em `backend\backups\`.
+
+**Onde ficam os logs?**
+Em dois lugares: `logs\` na raiz guarda a saída do `iniciar.bat` (erros ao subir backend e interface), e
+`backend\logs\prospeccao.log` guarda o que o sistema fez enquanto rodava (buscas, IA, WhatsApp).
 
 **Como faço backup?**
 Copie `backend\leads.db` (seus leads) e `backend\estrategia_abordagem.md` (sua estratégia).

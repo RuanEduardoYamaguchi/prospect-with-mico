@@ -1,9 +1,9 @@
 # Estratégia de abordagem
 
 > Este é o MODELO da sua estratégia. Ele manda no gerador de mensagens do
-> PROSPECT WITH MICO (botões "Gerar copy de contato" e "Gerar pedido de print" na ficha
-> do lead). Na tela Hoje, abra "Estratégia de abordagem", clique em "Começar
-> pelo modelo", troque tudo que está marcado com [PREENCHER: ...] e salve.
+> PROSPECT WITH MICO (botões "Contato" e "Pedido de print" na ficha do lead, e
+> "Gerar copy de contato" na tela Hoje). Em Configurações > Estratégia de
+> abordagem, clique em "Começar pelo modelo", troque tudo que está marcado com [PREENCHER: ...] e salve.
 > Vale na próxima mensagem, sem reiniciar nada. Escreva do jeito que você
 > explicaria pra alguém novo no seu time. Deixar vazio usa o padrão da
 > ferramenta (oferta de site).
@@ -32,7 +32,7 @@ Regras de ângulo (ajuste ao seu mercado):
 
 Você escolhe qual usar em cada lead, pelo botão. Elas não se misturam.
 
-### 1. Pedido de print (botão "Gerar pedido de print")
+### 1. Pedido de print (botão "Pedido de print")
 
 Não vende nada e não diagnostica nada: pede pra falar com o responsável e
 oferece um print de algo que já existe com o nome do negócio. O pitch só vem
@@ -51,7 +51,7 @@ preço ou link. O que faz ela funcionar é a curiosidade e o pedido minúsculo.
 diz "construí", no passado. Se o lead responde em dois minutos e não há nada pra
 mandar, a curiosidade esfria bem no melhor momento.
 
-### 2. Abordagem direta (botão "Gerar copy de contato")
+### 2. Abordagem direta (botão "Contato")
 
 Para quando você quer já entregar o argumento. Aqui entram a nota e o volume de
 avaliações do Google, como prova de que você olhou o negócio, seguidas da

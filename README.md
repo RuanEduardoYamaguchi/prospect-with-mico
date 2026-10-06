@@ -136,6 +136,7 @@ py -m venv .venv
 prospect-with-mico/
 ├── iniciar.bat            # sobe tudo (backend, interface e WhatsApp) com dois cliques
 ├── configurar.bat         # cria os .env com chaves geradas na sua máquina
+├── parar.bat              # desliga tudo (fechar a aba não desliga)
 ├── backend/               # Flask + SQLite: busca, análise, IA, WhatsApp, campanhas
 │   ├── .env.example       # modelo das suas chaves (nenhuma vem preenchida)
 │   ├── estrategia_abordagem.exemplo.md   # modelo da sua estratégia
