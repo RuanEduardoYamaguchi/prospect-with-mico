@@ -13,4 +13,4 @@ docker compose stop >nul 2>&1
 popd
 
 echo Pronto. Pra abrir de novo, use o iniciar.bat.
-timeout /t 3 /nobreak >nul
+ping -n 4 127.0.0.1 >nul
